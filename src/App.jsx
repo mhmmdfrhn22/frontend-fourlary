@@ -14,8 +14,9 @@ import BeritaView from "./pages/BeritaView";
 import PembinatView from "./pages/PembinatView";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/Notfound";
 import FloatingInstallButton from "./components/FloatingInstallButton";
+
 
 // Dashboard Admin
 import Dashboard from "./pages/Dashboard";
