@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,14 +11,24 @@ const API_URL = 'https://backend-fourlary-production.up.railway.app/api/user';
 
 export function RegisterComponent({ className, ...props }) {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    if (email !== confirmEmail) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email tidak cocok',
+        text: 'Email dan konfirmasi email harus sama.',
+      });
+      return;
+    }
+
     try {
-      // Set role_id secara default ke 1 (guest)
       const role = 1;
 
       const response = await fetch(`${API_URL}/register`, {
@@ -26,7 +36,7 @@ export function RegisterComponent({ className, ...props }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, role_id: role }),
+        body: JSON.stringify({ username, email, confirmEmail, password, role_id: role }),
       });
 
       if (!response.ok) {
@@ -48,15 +58,16 @@ export function RegisterComponent({ className, ...props }) {
       }
 
       const data = await response.json();
-      
+
       Swal.fire({
         icon: 'success',
         title: 'Registrasi Berhasil!',
-        text: 'Sekarang Anda bisa login.',
+        text: 'Sekarang Anda bisa memverifikasi email Anda.',
         timer: 2000,
         showConfirmButton: false,
       }).then(() => {
-        navigate('/login');
+        // Mengarahkan ke halaman verifikasi email dan mengirimkan userId
+        navigate('/verify-email', { state: { userId: data.id } });
       });
     } catch (error) {
       console.error('Register error:', error);
@@ -88,6 +99,32 @@ export function RegisterComponent({ className, ...props }) {
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+
+        {/* Email */}
+        <div className="grid gap-3">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="Masukkan email Anda"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        {/* Confirm Email */}
+        <div className="grid gap-3">
+          <Label htmlFor="confirmEmail">Konfirmasi Email</Label>
+          <Input
+            id="confirmEmail"
+            type="email"
+            placeholder="Masukkan kembali email Anda"
+            required
+            value={confirmEmail}
+            onChange={(e) => setConfirmEmail(e.target.value)}
           />
         </div>
 

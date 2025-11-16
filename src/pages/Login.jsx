@@ -24,6 +24,11 @@ export default function LoginPage() {
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
             <LoginComponent />
+            <div className="mt-4 text-center">
+              <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+                Lupa Password?
+              </a>
+            </div>
           </div>
         </div>
       </div>

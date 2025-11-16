@@ -15,6 +15,9 @@ import PembinatView from "./pages/PembinatView";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/Notfound";
+import VerifyEmail from "./pages/VerifyEmail"; // Halaman verifikasi email
+import ForgotPassword from "./pages/ForgotPassword"; // Halaman forgot password
+import ResetPassword from "./pages/ResetPassword"; // Halaman reset password
 import FloatingInstallButton from "./components/FloatingInstallButton";
 
 
@@ -72,7 +75,10 @@ function App() {
     location.pathname.startsWith("/dashboard") ||
     location.pathname.startsWith("/dashboard-pdd") ||
     location.pathname === "/login" ||
-    location.pathname === "/register";
+    location.pathname === "/register" ||
+    location.pathname === "/verify-email" || // tambahkan halaman verifikasi email
+    location.pathname === "/forgot-password" || // tambahkan halaman forgot password
+    location.pathname === "/reset-password"; // tambahkan halaman reset password
 
   // Tampilkan SplashScreen dulu sebelum semua halaman
   if (showSplash) {
@@ -99,6 +105,9 @@ function App() {
         {/* Auth */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* ===================== */}
         {/* DASHBOARD ADMIN (Role 2) */}
@@ -142,6 +151,7 @@ function App() {
           <Route path="ManajemenBerita" element={<ManajemenBerita />} />
           <Route path="ManajemenKategori" element={<ManajemenKategori />} />
         </Route>
+
 
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />
