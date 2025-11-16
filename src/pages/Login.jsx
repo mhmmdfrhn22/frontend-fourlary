@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import LoginComponent from "../components/login-component.jsx";
 
 // Import gambar
-import logoImage from '/src/assets/logofourlary.svg';
-import loginImage from '/src/assets/loginimage.JPG';
+import logoImage from '../assets/logofourlary.svg';
+import loginImage from '../assets/loginimage.JPG';
 
 export default function LoginPage() {
   return (

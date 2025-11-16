@@ -2,8 +2,8 @@ import { GalleryVerticalEnd } from "lucide-react";
 import { RegisterComponent } from "../components/register-component";
 
 // Import gambar
-import logoImage from '/src/assets/logofourlary.svg';
-import loginImage from '/src/assets/loginimage.JPG';
+import logoImage from '../assets/logofourlary.svg';
+import loginImage from '../assets/loginimage.JPG';
 
 export default function Register() {
   return (

@@ -13,10 +13,10 @@ import {
 } from "lucide-react"
 
 // Mengimpor gambar untuk jurusan
-import PPLGImage from "/src/assets/PPLG.jpg";
-import TJKTImage from "/src/assets/TJKT.jpg";
-import TOImage from "/src/assets/TO.jpg";
-import TPImage from "/src/assets/TP.jpg";
+import PPLGImage from "../assets/PPLG.jpg";
+import TJKTImage from "../assets/TJKT.jpg";
+import TOImage from "../assets/TO.jpg";
+import TPImage from "../assets/TP.jpg";
 
 export default function JurusanSekolah() {
   const jurusanList = [

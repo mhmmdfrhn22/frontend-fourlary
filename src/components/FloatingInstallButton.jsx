@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 
 // Mengimpor gambar logo
-import logoImage from "/src/assets/logo.png";
+import logoImage from "../assets/logo.png";
 
 const FloatingInstallButton = () => {
   const downloadLink =
