@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import fotovisiImage from "../assets/fotovisi.JPG";
+
 
 export default function Visimisi() {
   return (
@@ -77,7 +79,7 @@ export default function Visimisi() {
         >
           <img
             alt=""
-            src="/src/assets/fotovisi.JPG"
+            src={fotovisiImage}
             className="w-3xl max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-228"
           />
         </motion.div>

@@ -12,6 +12,12 @@ import {
   CheckCircle,
 } from "lucide-react"
 
+// Mengimpor gambar untuk jurusan
+import PPLGImage from "/src/assets/PPLG.jpg";
+import TJKTImage from "/src/assets/TJKT.jpg";
+import TOImage from "/src/assets/TO.jpg";
+import TPImage from "/src/assets/TP.jpg";
+
 export default function JurusanSekolah() {
   const jurusanList = [
     {
@@ -30,8 +36,7 @@ export default function JurusanSekolah() {
         "Bekerja sama secara efektif sebagai anggota maupun tim proyek.",
         "Memiliki jiwa kewirausahaan di bidang industri kreatif digital.",
       ],
-      gambar:
-        "/src/assets/PPLG.jpg",
+      gambar: PPLGImage, // Menggunakan gambar yang diimpor
     },
     {
       nama: "TJKT (Teknik Jaringan Komputer dan Telekomunikasi)",
@@ -49,8 +54,7 @@ export default function JurusanSekolah() {
         "Mampu mengelola server berbasis Linux dan Windows Server.",
         "Mengetahui dasar-dasar teknologi fiber optic dan instalasinya.",
       ],
-      gambar:
-        "/src/assets/TJKT.jpg",
+      gambar: TJKTImage, // Menggunakan gambar yang diimpor
     },
     {
       nama: "Teknik Otomotif",
@@ -68,8 +72,7 @@ export default function JurusanSekolah() {
         "Mampu membaca dan memahami diagram sistem otomotif modern.",
         "Menjaga keselamatan kerja dan menerapkan standar industri otomotif.",
       ],
-      gambar:
-        "/src/assets/TO.jpg",
+      gambar: TOImage, // Menggunakan gambar yang diimpor
     },
     {
       nama: "Teknik Pengelasan",
@@ -86,8 +89,7 @@ export default function JurusanSekolah() {
         "Menguasai fabrikasi logam untuk berbagai kebutuhan industri.",
         "Siap bersaing di dunia industri manufaktur dan konstruksi.",
       ],
-      gambar:
-        "/src/assets/TP.jpg",
+      gambar: TPImage, // Menggunakan gambar yang diimpor
     },
   ]
 
@@ -121,7 +123,7 @@ export default function JurusanSekolah() {
               {/* Image Section */}
               <div className="rounded-2xl relative h-62 overflow-hidden">
                 <img
-                  src={item.gambar}
+                  src={item.gambar} // Gambar yang sudah diimpor
                   alt={item.nama}
                   className="rounded-2xl object-cover w-full h-full transform hover:scale-105 transition duration-500"
                 />

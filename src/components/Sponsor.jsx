@@ -1,5 +1,17 @@
 import { motion } from "framer-motion";
 
+// Mengimpor gambar
+import logo1 from "../assets/1.png";
+import logo2 from "../assets/2.png";
+import logo3 from "../assets/3.png";
+import logo4 from "../assets/4.png";
+import logo5 from "../assets/5.png";
+import logo6 from "../assets/6.png";
+import logo7 from "../assets/7.png";
+import logo8 from "../assets/8.png";
+import logo9 from "../assets/9.png";
+import logo10 from "../assets/10.png";
+
 export default function Sponsor() {
   return (
     <motion.section
@@ -37,18 +49,7 @@ export default function Sponsor() {
           viewport={{ once: true }}
           className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5"
         >
-          {[
-            "/src/assets/1.png",
-            "/src/assets/2.png",
-            "/src/assets/3.png",
-            "/src/assets/4.png",
-            "/src/assets/5.png",
-            "/src/assets/6.png",
-            "/src/assets/7.png",
-            "/src/assets/8.png",
-            "/src/assets/9.png",
-            "/src/assets/10.png",
-          ].map((logo, i) => (
+          {[logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10].map((logo, i) => (
             <motion.img
               key={i}
               src={logo}

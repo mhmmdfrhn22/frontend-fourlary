@@ -1,5 +1,9 @@
-import { GalleryVerticalEnd } from "lucide-react"
-import { RegisterComponent } from "../components/register-component"
+import { GalleryVerticalEnd } from "lucide-react";
+import { RegisterComponent } from "../components/register-component";
+
+// Import gambar
+import logoImage from '/src/assets/logofourlary.svg';
+import loginImage from '/src/assets/loginimage.JPG';
 
 export default function Register() {
   return (
@@ -10,7 +14,8 @@ export default function Register() {
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="/" className="flex items-center gap-2 font-medium">
             <div className="flex size-24 items-center justify-center rounded-md">
-            <img src="/src/assets/logofourlary.svg" alt="Image"/>
+              {/* Menggunakan gambar yang diimport */}
+              <img src={logoImage} alt="Logo Fourlary" />
             </div>
           </a>
         </div>
@@ -25,12 +30,13 @@ export default function Register() {
 
       {/* Right side (image) */}
       <div className="bg-muted relative hidden lg:block">
+        {/* Menggunakan gambar yang diimport */}
         <img
-          src="/src/assets/loginimage.JPG"
-          alt="Image"
+          src={loginImage}
+          alt="Login Image"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
     </div>
-  )
+  );
 }

@@ -1,5 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
+// Mengimpor gambar
+import loginImage from "../assets/loginimage.JPG";
+import djiImage from "../assets/DJI_0105.JPG";
 import CTAsection from "../components/CTAsection";
 
 const stats = [
@@ -48,9 +51,10 @@ export default function About() {
           animate="visible"
           className="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
         >
+          {/* Menggunakan gambar yang diimport */}
           <img
             alt="SMKN 4 Bogor"
-            src="/src/assets/loginimage.JPG"
+            src={loginImage} // Gambar login
             className="w-3xl max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-228"
           />
         </motion.div>
@@ -85,9 +89,10 @@ export default function About() {
         animate="visible"
         className="relative isolate overflow-hidden bg-white py-24 sm:py-40"
       >
+        {/* Menggunakan gambar yang diimport */}
         <img
           alt="SMKN 4 Bogor"
-          src="/src/assets/DJI_0105.JPG"
+          src={djiImage} // Gambar DJI
           className="absolute inset-0 -z-10 size-full object-cover object-right opacity-10 md:object-center"
         />
 

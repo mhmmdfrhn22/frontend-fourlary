@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 
+// Mengimpor gambar
+import registerImage from "../assets/Register2.png";
+import heroImage from "../assets/hero.png";
+
 export default function Bento() {
-  // Variants untuk animasi grid dan anak-anaknya
   const container = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -29,7 +32,6 @@ export default function Bento() {
       className="bg-gray-50 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-        {/* Judul */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -51,7 +53,6 @@ export default function Bento() {
           <span className="text-blue-800">Fourlary🧐</span>
         </motion.p>
 
-        {/* Grid Fitur */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -75,7 +76,7 @@ export default function Bento() {
                 <div className="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
                   <img
                     alt=""
-                    src="/src/assets/Register2.png"
+                    src={registerImage}
                     className="size-full object-cover object-top"
                   />
                 </div>
@@ -145,7 +146,7 @@ export default function Bento() {
               <div className="relative min-h-120 w-full grow">
                 <img
                   alt=""
-                  src="/src/assets/hero.png"
+                  src={heroImage}
                   className="object-contain absolute -right-[250px] h-[500px] rounded-tl-xl scale-200"
                 />
               </div>
