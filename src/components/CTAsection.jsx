@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-// Mengimpor gambar
-import heroImage from "../assets/hero.png"; // Gambar yang akan digunakan
 
 export default function Example() {
+  // Animasi container dan child (biar fade + slide + stagger)
   const container = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -112,7 +111,7 @@ export default function Example() {
           >
             <motion.img
               alt="App screenshot"
-              src={heroImage} // Menggunakan gambar yang di-import
+              src="/src/assets/hero.png"
               width={1824}
               height={1080}
               className="absolute top-0 left-0 w-228 max-w-none rounded-md bg-white/5 ring-1 ring-white/10"

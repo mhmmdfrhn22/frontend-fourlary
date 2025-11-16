@@ -164,7 +164,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile menu */}
-      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+      <Dialog open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} className="lg:hidden">
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-200">
           <div className="flex items-center justify-between">
@@ -194,15 +194,27 @@ export default function Navbar() {
                         key={item.name}
                         to={item.href}
                         className="block rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+                        onClick={() => setMobileMenuOpen(false)} // Menutup menu setelah klik
                       >
                         {item.name}
                       </Link>
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
-                <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Beranda</Link>
-                <Link to="/PembinatView" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Pembinat</Link>
-                <Link to="/gallery" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Galeri Sekolah</Link>
+                <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50" onClick={() => setMobileMenuOpen(false)}>Beranda</Link>
+                <Link to="/PembinatView" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50" onClick={() => setMobileMenuOpen(false)}>Pembinat</Link>
+                <Link to="/gallery" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50" onClick={() => setMobileMenuOpen(false)}>Galeri Sekolah</Link>
+
+                {/* Add Admin and PDD Dashboard Links */}
+                {user && (user.role_id === 2 || user.role_id === 3) && (
+                  <Link
+                    to={user.role_id === 2 ? '/dashboard' : '/dashboard-pdd'}
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)} // Menutup menu setelah klik
+                  >
+                    {user.role_id === 2 ? 'Dashboard' : 'Dashboard PDD'}
+                  </Link>
+                )}
               </div>
               <div className="py-6">
                 {!user ? (
