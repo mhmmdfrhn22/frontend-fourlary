@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+import heroImage from "../assets/hero.png";
 export default function Example() {
   // Animasi container dan child (biar fade + slide + stagger)
   const container = {
@@ -111,7 +112,7 @@ export default function Example() {
           >
             <motion.img
               alt="App screenshot"
-              src="/src/assets/hero.png"
+              src={heroImage}
               width={1824}
               height={1080}
               className="absolute top-0 left-0 w-228 max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
