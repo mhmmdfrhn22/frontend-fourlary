@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom'; // Import Link from React Router
 
 export default function Hero() {
   return (
@@ -55,15 +56,16 @@ export default function Hero() {
             hingga cari bakat mu di SMK Negeri 4 Kota Bogor Bersama Fourlary.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="/Gallery"
+            {/* Ganti dengan Link dari React Router */}
+            <Link
+              to="/gallery"
               className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Lihat Galeri
-            </a>
-            <a href="/About" className="text-base font-semibold text-gray-900">
+            </Link>
+            <Link to="/about" className="text-base font-semibold text-gray-900">
               Tentang Sekolah <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
