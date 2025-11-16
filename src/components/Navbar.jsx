@@ -67,7 +67,7 @@ export default function Navbar() {
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Fourlary</span>
-            <img className="flex w-32" src="/src/assets/logofourlary.svg" alt="Logo" />
+            <img className="flex w-32" src="../src/assets/logofourlary.svg" alt="Logo" />
           </Link>
         </div>
 

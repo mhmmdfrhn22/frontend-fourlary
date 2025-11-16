@@ -1,7 +1,7 @@
 // src/components/SplashScreen.jsx
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import heroLogo from "/assets/logofourlary.svg"; // pastikan path benar
+import heroLogo from "../assets/logofourlary.svg"; // pastikan path benar
 
 const SplashScreen = ({ onFinish }) => {
   const [visible, setVisible] = useState(true);
