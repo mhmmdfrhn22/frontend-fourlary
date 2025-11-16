@@ -30,6 +30,7 @@ import {
 } from '@heroicons/react/20/solid'
 import { motion } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
+import heroLogo from "../assets/logofourlary.svg"; 
 
 const products = [
   { name: 'Tentang Sekolah', description: 'Pengenalan Profile dan Sejarah Sekolah', href: '/about', icon: CursorArrowRaysIcon },
@@ -67,7 +68,7 @@ export default function Navbar() {
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Fourlary</span>
-            <img className="flex w-32" src="../src/assets/logofourlary.svg" alt="Logo" />
+            <img className="flex w-32" src={heroLogo} alt="Logo" />
           </Link>
         </div>
 
