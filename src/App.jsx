@@ -85,8 +85,8 @@ function App() {
       <Routes>
         {/* Halaman Utama */}
         <Route path="/" element={<Home />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/Gallery" element={<Gallery />} />
+        <Route path="/About" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/visimisi" element={<Visimisi />} />
         <Route path="/GuruView" element={<GuruView />} />
