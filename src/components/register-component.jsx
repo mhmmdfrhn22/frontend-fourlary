@@ -29,7 +29,7 @@ export function RegisterComponent({ className, ...props }) {
     }
 
     try {
-      const role = 1;
+      const role = 1; // default role, adjust according to your backend logic
 
       const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
@@ -40,35 +40,28 @@ export function RegisterComponent({ className, ...props }) {
       });
 
       if (!response.ok) {
-        if (response.status === 400) {
-          const errorData = await response.json();
-          Swal.fire({
-            icon: 'error',
-            title: 'Registrasi Gagal',
-            text: errorData.errors ? errorData.errors[0].msg : 'Terjadi kesalahan pada data yang Anda masukkan.',
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Registrasi Gagal',
-            text: 'Terjadi kesalahan server. Mohon coba lagi nanti.',
-          });
-        }
+        const errorData = await response.json();
+        Swal.fire({
+          icon: 'error',
+          title: 'Registrasi Gagal',
+          text: errorData.error || 'Terjadi kesalahan pada data yang Anda masukkan.',
+        });
         return;
       }
 
       const data = await response.json();
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Registrasi Berhasil!',
-        text: 'Sekarang Anda bisa memverifikasi email Anda.',
-        timer: 2000,
-        showConfirmButton: false,
-      }).then(() => {
-        // Mengarahkan ke halaman verifikasi email dan mengirimkan userId
-        navigate('/verify-email', { state: { userId: data.id } });
-      });
+      // Cek apakah OTP sudah dikirim
+      if (data.message) {
+        Swal.fire({
+          icon: 'success',
+          title: 'OTP telah dikirim!',
+          text: 'Cek email Anda untuk melanjutkan verifikasi.',
+        }).then(() => {
+          // Mengarahkan pengguna ke halaman verifikasi email
+          navigate('/verify-email', { state: { userId: data.id } });
+        });
+      }
     } catch (error) {
       console.error('Register error:', error);
       Swal.fire({

@@ -50,32 +50,53 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-50">
-      <form className="bg-gray-50 p-8 rounded-md shadow-md w-full sm:w-96" onSubmit={handleForgotPassword}>
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Lupa Password?</h1>
-          <p className="text-sm text-gray-600">Masukkan email Anda untuk menerima OTP.</p>
-        </div>
+    <div className="min-h-screen flex items-stretch bg-gray-50">
+      {/* 🔹 FORM DI KANAN */}
+      <div className="flex w-full items-center justify-center p-6 lg:w-1/2">
+        <div className="w-full max-w-xs">
+          <div className="flex flex-col gap-6">
+            <form onSubmit={handleForgotPassword}>
+              <div className="flex flex-col items-center gap-1 text-center">
+                <h1 className="text-2xl font-bold">Lupa Password?</h1>
+                <p className="text-muted-foreground text-sm">
+                  Masukkan email Anda untuk menerima OTP.
+                </p>
+              </div>
+              <br />
+              <div className="grid gap-6">
+                <div className="grid gap-3">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Masukkan email Anda"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="p-3 border border-gray-300 rounded-md"
+                  />
+                </div>
 
-        <div className="grid gap-6">
-          <div className="grid gap-3">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="Masukkan email Anda"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="p-3 border border-gray-300 rounded-md"
-            />
+                <Button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700"
+                >
+                  Kirim OTP
+                </Button>
+              </div>
+            </form>
           </div>
-
-          <Button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700">
-            Kirim OTP
-          </Button>
         </div>
-      </form>
+      </div>
+
+      {/* LEFT IMAGE */}
+      <div className="relative hidden lg:block w-1/2">
+        <img
+          src="/frame_6262403.png"
+          alt="Forgot Password Illustration"
+          className="absolute inset-0 w-full h-full object-cover filter saturate-0"
+        />
+      </div>
     </div>
   );
 }
