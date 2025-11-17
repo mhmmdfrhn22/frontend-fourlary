@@ -7,30 +7,28 @@ import { Label } from "@/components/ui/label";
 const API_URL = 'https://backend-fourlary-production.up.railway.app/api/user';
 
 export default function ResetPassword() {
-    const [otp, setOtp] = useState('');  // Using useState for otp
-    const [newPassword, setNewPassword] = useState('');  // Using useState for newPassword
-    const [email, setEmail] = useState('');  // Added state for email
+    const [newPassword, setNewPassword] = useState('');  // State for newPassword
+    const [confirmPassword, setConfirmPassword] = useState('');  // State for confirmPassword
+    const token = new URLSearchParams(window.location.search).get('token');  // Get token from URL
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
 
+        // Validasi konfirmasi password
+        if (newPassword !== confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Password tidak cocok',
+                text: 'Password baru dan konfirmasi password harus sama.',
+            });
+            return;
+        }
+
         try {
-            // Getting userId by email first
-            const userId = await getUserIdByEmail(email);  // Make sure this function is implemented
-
-            if (!userId) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'User ID tidak ditemukan',
-                    text: 'Gagal menemukan user dengan email tersebut.',
-                });
-                return;
-            }
-
             const response = await fetch(`${API_URL}/reset-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp, newPassword, userId }),  // Pass userId here
+                body: JSON.stringify({ newPassword, confirmPassword, token }),  // Send token and newPassword
             });
 
             const data = await response.json();
@@ -41,13 +39,13 @@ export default function ResetPassword() {
                     title: 'Password Berhasil Direset!',
                     text: 'Anda sekarang dapat login dengan password baru.',
                 }).then(() => {
-                    window.location.href = '/login'; // Redirect user to login page
+                    window.location.href = '/login'; // Redirect to login page
                 });
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Reset Password Gagal',
-                    text: data.message || 'OTP yang Anda masukkan salah.',
+                    text: data.message || 'Terjadi kesalahan dalam proses reset password.',
                 });
             }
         } catch (error) {
@@ -65,23 +63,10 @@ export default function ResetPassword() {
             <form className="bg-gray-50 p-8 rounded-md shadow-md w-full sm:w-96" onSubmit={handleResetPassword}>
                 <div className="text-center mb-6">
                     <h1 className="text-2xl font-bold text-gray-800">Reset Password</h1>
-                    <p className="text-sm text-gray-600">Masukkan OTP dan password baru Anda</p>
+                    <p className="text-sm text-gray-600">Masukkan password baru Anda</p>
                 </div>
 
                 <div className="grid gap-6">
-                    <div className="grid gap-3">
-                        <Label htmlFor="otp">Kode OTP</Label>
-                        <Input
-                            id="otp"
-                            type="text"
-                            placeholder="Masukkan OTP"
-                            required
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                            className="p-3 border border-gray-300 rounded-md"
-                        />
-                    </div>
-
                     <div className="grid gap-3">
                         <Label htmlFor="newPassword">Password Baru</Label>
                         <Input
@@ -91,6 +76,19 @@ export default function ResetPassword() {
                             required
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
+                            className="p-3 border border-gray-300 rounded-md"
+                        />
+                    </div>
+
+                    <div className="grid gap-3">
+                        <Label htmlFor="confirmPassword">Konfirmasi Password Baru</Label>
+                        <Input
+                            id="confirmPassword"
+                            type="password"
+                            placeholder="Masukkan konfirmasi password baru"
+                            required
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             className="p-3 border border-gray-300 rounded-md"
                         />
                     </div>
