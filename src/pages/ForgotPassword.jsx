@@ -30,7 +30,7 @@ export default function ForgotPassword() {
           text: "Cek email Anda untuk mendapatkan OTP.",
         }).then(() => {
           // Redirect ke halaman reset password
-          window.location.href = '/reset-password';
+          window.location.href = '/login';
         });
       } else {
         Swal.fire({
