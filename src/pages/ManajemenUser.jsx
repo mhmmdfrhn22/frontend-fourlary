@@ -89,6 +89,7 @@ export default function ManajemenUser() {
               ...u,
               role: getRoleName(u.role_id),
               joinedAt: u.created_at,
+              email: u.email,  // Menambahkan email ke data
             }))
           )
         }
@@ -143,6 +144,7 @@ export default function ManajemenUser() {
     const newUser = {
       username: formData.get("username"),
       password: formData.get("password"),
+      email: formData.get("email"),  // Mengambil email dari form
       role_id: getRoleId(formData.get("role")),
     }
 
@@ -180,7 +182,7 @@ export default function ManajemenUser() {
     const updatedUser = {
       ...editingUser,
       username: formData.get("username"),
-      joinedAt: formData.get("joinedAt"),
+      email: formData.get("email"),  // Mengambil email dari form
       role_id: getRoleId(formData.get("role")),
     }
 
@@ -264,6 +266,10 @@ export default function ManajemenUser() {
                   <div className="grid gap-2">
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password" name="password" required />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" type="email" name="email" required />
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="role">Role</Label>
@@ -359,7 +365,7 @@ export default function ManajemenUser() {
                 {getRoleBadge(user.role)}
               </div>
               <p className="text-sm text-gray-500">
-                Tanggal Bergabung: {user.joinedAt?.split("T")[0]}
+                Email: {user.email} {/* Menampilkan email */}
               </p>
               <div className="flex gap-2 mt-3">
                 <Dialog
@@ -380,7 +386,7 @@ export default function ManajemenUser() {
                     <DialogHeader>
                       <DialogTitle>Edit Pengguna</DialogTitle>
                       <DialogDescription>
-                        Ubah username, tanggal bergabung, dan role.
+                        Ubah username, email, dan role.
                       </DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleEditSubmit}>
@@ -395,12 +401,11 @@ export default function ManajemenUser() {
                           />
                         </div>
                         <div className="grid gap-2">
-                          <Label htmlFor="joinedAt">Tanggal Bergabung</Label>
+                          <Label htmlFor="email">Email</Label>
                           <Input
-                            id="joinedAt"
-                            type="date"
-                            name="joinedAt"
-                            defaultValue={editingUser?.joinedAt?.split("T")[0]}
+                            id="email"
+                            name="email"
+                            defaultValue={editingUser?.email}
                             required
                           />
                         </div>
@@ -447,6 +452,7 @@ export default function ManajemenUser() {
               <TableRow>
                 <TableHead className="w-[50px]">No</TableHead>
                 <TableHead className="text-left w-[350px]">Username</TableHead>
+                <TableHead>Email</TableHead> {/* Menampilkan Email */}
                 <TableHead>Tanggal Bergabung</TableHead>
                 <TableHead>Role User</TableHead>
                 <TableHead className="text-left w-[300px]">Aksi</TableHead>
@@ -457,6 +463,7 @@ export default function ManajemenUser() {
                 <TableRow key={user.id}>
                   <TableCell>{indexOfFirstUser + index + 1}</TableCell>
                   <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.email}</TableCell> {/* Menampilkan email */}
                   <TableCell>{user.joinedAt?.split("T")[0]}</TableCell>
                   <TableCell>{getRoleBadge(user.role)}</TableCell>
                   <TableCell className="text-left space-x-2">
@@ -478,7 +485,7 @@ export default function ManajemenUser() {
                         <DialogHeader>
                           <DialogTitle>Edit Pengguna</DialogTitle>
                           <DialogDescription>
-                            Ubah username, tanggal bergabung, dan role.
+                            Ubah username, email, dan role.
                           </DialogDescription>
                         </DialogHeader>
                         <form onSubmit={handleEditSubmit}>
@@ -493,12 +500,11 @@ export default function ManajemenUser() {
                               />
                             </div>
                             <div className="grid gap-2">
-                              <Label htmlFor="joinedAt">Tanggal Bergabung</Label>
+                              <Label htmlFor="email">Email</Label>
                               <Input
-                                id="joinedAt"
-                                type="date"
-                                name="joinedAt"
-                                defaultValue={editingUser?.joinedAt?.split("T")[0]}
+                                id="email"
+                                name="email"
+                                defaultValue={editingUser?.email}
                                 required
                               />
                             </div>
