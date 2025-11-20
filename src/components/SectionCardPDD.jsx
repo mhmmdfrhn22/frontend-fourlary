@@ -14,8 +14,10 @@ export function SectionCardPDD() {
         const fetchStats = async () => {
             try {
                 const rawUser = localStorage.getItem("user")
-                if (!rawUser) {
-                    console.warn("Tidak ada user di localStorage")
+                const token = localStorage.getItem("token")   // 🔥 FIX: AMBIL TOKEN
+
+                if (!rawUser || !token) {
+                    console.warn("User atau token tidak ada di localStorage")
                     return
                 }
 
@@ -28,12 +30,24 @@ export function SectionCardPDD() {
 
                 console.log("Mengambil data untuk user:", userId)
 
+                // 🔥 FIX: SEMUA FETCH KIRIM TOKEN
                 const [beritaRes, fotoRes, likesRes, komentarRes] = await Promise.all([
-                    fetch(`https://backend-fourlary-production.up.railway.app/api/posts/count/${userId}`).then(r => r.json()),
-                    fetch(`https://backend-fourlary-production.up.railway.app/api/foto/count/${userId}`).then(r => r.json()),
-                    fetch(`https://backend-fourlary-production.up.railway.app/api/like-foto/count/${userId}`).then(r => r.json()),
-                    fetch(`https://backend-fourlary-production.up.railway.app/api/komentar-foto/count/${userId}`).then(r => r.json()),
-                ]);
+                    fetch(`https://backend-fourlary-production.up.railway.app/api/posts/count/${userId}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }).then(r => r.json()),
+
+                    fetch(`https://backend-fourlary-production.up.railway.app/api/foto/count/${userId}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }).then(r => r.json()),
+
+                    fetch(`https://backend-fourlary-production.up.railway.app/api/like-foto/count/${userId}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }).then(r => r.json()),
+
+                    fetch(`https://backend-fourlary-production.up.railway.app/api/komentar-foto/count/${userId}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }).then(r => r.json()),
+                ])
 
                 console.log("Respon berita:", beritaRes)
 
@@ -42,7 +56,7 @@ export function SectionCardPDD() {
                     berita: beritaRes.total || 0,
                     likes: likesRes.total || 0,
                     komentar: komentarRes.total || 0,
-                });
+                })
 
             } catch (err) {
                 console.error("Gagal mengambil data perkembangan PDD:", err)
