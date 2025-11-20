@@ -1,35 +1,30 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
-import { SectionCardPDD } from "@/components/SectionCardPDD"
-import { ChartComponentPDD } from "@/components/ChartComponentPDD"
+import React, { useEffect, useState } from "react";
+import { SectionCardPDD } from "@/components/SectionCardPDD";
+import { ChartComponentPDD } from "@/components/ChartComponentPDD";
 
 export default function DashboardHomePDD() {
-  // ✅ Simulasikan userId (misalnya dari login, context, atau localStorage)
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user")
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
 
-    if (storedUser) {
-      try {
-        const parsed = JSON.parse(storedUser)
-        console.log("User ditemukan, id:", parsed.id)
-        setUserId(parsed.id)               // <-- FIX DISINI
-      } catch {
-        console.log("Gagal parse user, fallback ke 3")
-        setUserId(3)
-      }
+    if (storedUser && storedToken) {
+      const parsed = JSON.parse(storedUser);
+      setUserId(parsed.id);
+      setToken(storedToken);
     } else {
-      console.log("Tidak ada user di localStorage, fallback 3")
-      setUserId(3)
+      console.log("User atau token tidak ada → redirect?");
     }
-  }, [])
+  }, []);
 
   return (
     <div className="p-6 space-y-6">
-      <SectionCardPDD userId={userId} />
-      <ChartComponentPDD userId={userId} />
+      <SectionCardPDD userId={userId} token={token} />
+      <ChartComponentPDD userId={userId} token={token} />
     </div>
-  )
+  );
 }
