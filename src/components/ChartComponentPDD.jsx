@@ -60,7 +60,7 @@ export function ChartComponentPDD({ userId: propUserId }) {
     setUserId(Number(uid))
   }, [propUserId])
 
-  // Fetch statistik + TOKEN FIX
+  // Fetch data statistik
   useEffect(() => {
     if (!userId || isNaN(userId)) return
 
@@ -69,18 +69,10 @@ export function ChartComponentPDD({ userId: propUserId }) {
       setChartData([])
 
       try {
-        const token = localStorage.getItem("token") // 🔥 AMBIL TOKEN
-
         const url = `https://backend-fourlary-production.up.railway.app/api/like-foto/stats/${userId}?range=${timeRange}`
         console.log("Fetching:", url)
 
-        const res = await fetch(url, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // 🔥 TOKEN DIKIRIM
-          },
-        })
-
+        const res = await fetch(url)
         if (!res.ok) throw new Error("Gagal fetch data")
 
         const data = await res.json()
@@ -88,11 +80,13 @@ export function ChartComponentPDD({ userId: propUserId }) {
 
         const formatted = Array.isArray(data)
           ? data.map((item) => ({
-              date: item.date,
-              likes: item.total ?? 0,
-            }))
-          : []
+            date: item.date,   // pakai format YYYY-MM-DD langsung
+            likes: item.total ?? 0,
+          }))
+          : [];
 
+
+        // Antisipasi data cuma satu titik
         if (formatted.length === 1) {
           formatted.push({ ...formatted[0] })
         }
@@ -119,8 +113,8 @@ export function ChartComponentPDD({ userId: propUserId }) {
             {timeRange === "7d"
               ? "7 Hari Terakhir"
               : timeRange === "14d"
-              ? "14 Hari Terakhir"
-              : "30 Hari Terakhir"}
+                ? "14 Hari Terakhir"
+                : "30 Hari Terakhir"}
           </CardDescription>
         </div>
         <Select value={timeRange} onValueChange={setTimeRange}>
@@ -154,7 +148,7 @@ export function ChartComponentPDD({ userId: propUserId }) {
 
               <XAxis
                 dataKey="date"
-                interval={0}
+                interval={0} // tampilkan SEMUA tanggal, tidak diskip
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
@@ -168,13 +162,15 @@ export function ChartComponentPDD({ userId: propUserId }) {
                 }}
               />
 
+              {/* FIX UTAMA: grafik tidak terpotong & tidak masuk angka minus */}
               <YAxis
                 allowDecimals={false}
                 domain={[0, "auto"]}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(v) => v.toFixed(0)}
+                tickFormatter={(value) => value.toFixed(0)}  // tanpa koma
               />
+
 
               <ChartTooltip
                 cursor={false}
@@ -192,6 +188,7 @@ export function ChartComponentPDD({ userId: propUserId }) {
                 }
               />
 
+              {/* FIX BESAR: NATURAL → MONOTONE */}
               <Area
                 dataKey="likes"
                 type="monotone"

@@ -17,7 +17,7 @@ import logoImage from "../assets/Logo.png";
 
 const FloatingInstallButton = () => {
   const downloadLink =
-    "https://drive.google.com/uc?export=download&id=1S_G5ci8Byj_k6otpwswBIp8Jqm2T9L71";
+    "https://drive.google.com/uc?export=download&id=15LCyknf0OI3BUAT3siMxcGVih_sO-cLW";
 
   const [showHint, setShowHint] = useState(false);
   const [shake, setShake] = useState(false);
