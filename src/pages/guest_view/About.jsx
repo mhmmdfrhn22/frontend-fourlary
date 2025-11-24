@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 // Mengimpor gambar
-import loginImage from "../assets/loginimage.JPG";
-import djiImage from "../assets/DJI_0105.JPG";
-import CTAsection from "../components/CTAsection";
+import loginImage from "../../assets/loginimage.JPG";
+import djiImage from "../../assets/DJI_0105.JPG";
+import CTAsection from "../../components/home_component/CTAsection";
 
 const stats = [
   { name: "Jumlah peserta didik (siswa)", value: "1300+" },

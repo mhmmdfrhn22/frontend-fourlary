@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import heroImage from "../assets/hero.png";
+import heroImage from "../../assets/hero.png";
 export default function Example() {
   // Animasi container dan child (biar fade + slide + stagger)
   const container = {

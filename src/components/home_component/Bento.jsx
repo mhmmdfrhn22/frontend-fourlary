@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
 // Mengimpor gambar
-import registerImage from "../assets/Register2.png";
-import heroImage from "../assets/hero.png";
+import registerImage from "../../assets/Register2.png";
+import heroImage from "../../assets/hero.png";
 
 export default function Bento() {
   const container = {

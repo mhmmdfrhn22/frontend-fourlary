@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { SectionCardPDD } from "@/components/SectionCardPDD";
-import { ChartComponentPDD } from "@/components/ChartComponentPDD";
+import { SectionCardPDD } from "@/components/dashboard_component/SectionCardPDD";
+import { ChartComponentPDD } from "@/components/dashboard_component/ChartComponentPDD";
 
 export default function DashboardHomePDD() {
   const [userId, setUserId] = useState(null);

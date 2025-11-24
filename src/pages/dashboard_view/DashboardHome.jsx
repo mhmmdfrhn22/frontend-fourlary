@@ -1,5 +1,5 @@
-import { SectionCards } from "@/components/SectionCards" 
-import { ChartComponent } from "@/components/ChartComponent"
+import { SectionCards } from "@/components/dashboard_component/SectionCards" 
+import { ChartComponent } from "@/components/dashboard_component/ChartComponent"
 
 export default function DashboardHome() {
   return (

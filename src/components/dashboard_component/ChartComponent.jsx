@@ -38,24 +38,39 @@ export function ChartComponent() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`https://backend-fourlary-production.up.railway.app/api/user/stats?range=${timeRange}`)
-        if (!res.ok) throw new Error("Failed to fetch")
-        const data = await res.json()
+        const res = await fetch(`https://backend-fourlary-production.up.railway.app/api/user/stats?range=${timeRange}`);
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
 
-        // ubah format data agar sesuai dengan Recharts
-        const formatted = data.map(item => ({
-          date: new Date(item.date).toISOString(), // pastikan date valid ISO string
-          users: item.total,
-        }))
+        // Generate the full list of dates for the selected range
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - (timeRange === '7d' ? 7 : timeRange === '14d' ? 14 : 30));
+        const dateList = [];
 
-        setChartData(formatted)
+        // Generate an array of dates (e.g., 7 days back)
+        for (let i = 0; i < (timeRange === '7d' ? 7 : timeRange === '14d' ? 14 : 30); i++) {
+          const date = new Date(startDate);
+          date.setDate(date.getDate() + i);
+          dateList.push(date.toISOString().split('T')[0]);  // format as YYYY-MM-DD
+        }
+
+        // Fill missing data for each day with zero
+        const formattedData = dateList.map(date => {
+          const matchingData = data.find(item => item.date === date);
+          return {
+            date: date,
+            users: matchingData ? matchingData.total : 0,  // if no data, set users to 0
+          };
+        });
+
+        setChartData(formattedData);
       } catch (error) {
-        console.error("Error fetching stats:", error)
+        console.error("Error fetching stats:", error);
       }
     }
 
-    fetchData()
-  }, [timeRange])
+    fetchData();
+  }, [timeRange]);
 
   return (
     <Card className="pt-0">
@@ -81,7 +96,7 @@ export function ChartComponent() {
         </Select>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
+        <ChartContainer config={chartConfig} className="aspect-auto h-[350px] w-full">
           <AreaChart data={chartData}>
             <defs>
               <linearGradient id="fillUsers" x1="0" y1="0" x2="0" y2="1">
@@ -89,20 +104,21 @@ export function ChartComponent() {
                 <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0.1} />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
               tickLine={false}
               axisLine={false}
-              tickMargin={8}
-              minTickGap={32}
+              tickMargin={10}
+              minTickGap={16}
               tickFormatter={(value) => {
-                const date = new Date(value)
+                const date = new Date(value);
                 return date.toLocaleDateString("id-ID", {
                   month: "short",
                   day: "numeric",
-                })
+                });
               }}
+              height={60}
             />
             <ChartTooltip
               cursor={false}
@@ -120,14 +136,15 @@ export function ChartComponent() {
             />
             <Area
               dataKey="users"
-              type="natural"
+              type="monotone"
               fill="url(#fillUsers)"
               stroke="var(--chart-1)"
+              strokeWidth={2}
             />
             <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

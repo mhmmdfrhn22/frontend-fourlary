@@ -29,8 +29,8 @@ import {
   ChartPieIcon,
 } from '@heroicons/react/20/solid'
 import { motion } from 'framer-motion'
-import { useAuth } from '../context/AuthContext'
-import heroLogo from "../assets/logofourlary.svg"; 
+import { useAuth } from '../../context/AuthContext'
+import heroLogo from "../../assets/logofourlary.svg"; 
 
 const products = [
   { name: 'Tentang Sekolah', description: 'Pengenalan Profile dan Sejarah Sekolah', href: '/about', icon: CursorArrowRaysIcon },

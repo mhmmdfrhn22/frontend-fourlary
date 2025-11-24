@@ -1,48 +1,48 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import SplashScreen from "./components/SplashScreen";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Gallery from "./pages/Gallery";
-import GalleryDetail from "./pages/GalleryDetail";
-import Contact from "./pages/Contact";
-import Visimisi from "./pages/Visimisi";
-import GuruView from "./pages/GuruView";
-import BeritaView from "./pages/BeritaView";
-import PembinatView from "./pages/PembinatView";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import NotFound from "./pages/Notfound";
-import VerifyEmail from "./pages/VerifyEmail"; // Halaman verifikasi email
-import ForgotPassword from "./pages/ForgotPassword"; // Halaman forgot password
-import ResetPassword from "./pages/ResetPassword"; // Halaman reset password
-import FloatingInstallButton from "./components/FloatingInstallButton";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import SplashScreen from "./components/layout/SplashScreen";
+import Home from "./pages/guest_view/Home";
+import About from "./pages/guest_view/About";
+import Gallery from "./pages/guest_view/Gallery";
+import GalleryDetail from "./pages/guest_view/GalleryDetail";
+import Contact from "./pages/guest_view/Contact";
+import Visimisi from "./pages/guest_view/Visimisi";
+import GuruView from "./pages/guest_view/GuruView";
+import BeritaView from "./pages/guest_view/BeritaView";
+import PembinatView from "./pages/guest_view/PembinatView";
+import Login from "./pages/auth_view/Login";
+import Register from "./pages/auth_view/Register";
+import NotFound from "./pages/guest_view/Notfound";
+import VerifyEmail from "./pages/auth_view/VerifyEmail"; // Halaman verifikasi email
+import ForgotPassword from "./pages/auth_view/ForgotPassword"; // Halaman forgot password
+import ResetPassword from "./pages/auth_view/ResetPassword"; // Halaman reset password
+import FloatingInstallButton from "./components/layout/FloatingInstallButton";
 
 
 // Dashboard Admin
-import Dashboard from "./pages/Dashboard";
-import DashboardHome from "./pages/DashboardHome";
-import DashboardHomePDD from "./pages/DashboardHomePDD";
-import ManajemenUser from "./pages/ManajemenUser";
-import ManajemenGaleri from "./pages/ManajemenGaleri";
-import ManajemenBerita from "./pages/ManajemenBerita";
-import ManajemenKategori from "./pages/ManajemenKategori";
-import ManajemenKategoriFoto from "./pages/ManajemenKategoriFoto";
-import ManajemenKomentarFoto from "./pages/ManajemenKomentarFoto";
-import ManajemenJurusan from "./pages/ManajemenJurusan";
-import ManajemenPembimbing from "./pages/ManajemenPembimbing";
-import ManajemenPembinat from "./pages/ManajemenPembinat";
-import ManajemenGuru from "./pages/ManajemenGuru";
+import Dashboard from "./pages/dashboard_view/Dashboard";
+import DashboardHome from "./pages/dashboard_view/DashboardHome";
+import DashboardHomePDD from "./pages/dashboard_view/DashboardHomePDD";
+import ManajemenUser from "./pages/dashboard_view/ManajemenUser";
+import ManajemenGaleri from "./pages/dashboard_view/ManajemenGaleri";
+import ManajemenBerita from "./pages/dashboard_view/ManajemenBerita";
+import ManajemenKategori from "./pages/dashboard_view/ManajemenKategori";
+import ManajemenKategoriFoto from "./pages/dashboard_view/ManajemenKategoriFoto";
+import ManajemenKomentarFoto from "./pages/dashboard_view/ManajemenKomentarFoto";
+import ManajemenJurusan from "./pages/dashboard_view/ManajemenJurusan";
+import ManajemenPembimbing from "./pages/dashboard_view/ManajemenPembimbing";
+import ManajemenPembinat from "./pages/dashboard_view/ManajemenPembinat";
+import ManajemenGuru from "./pages/dashboard_view/ManajemenGuru";
 
 // Dashboard PDD
-import DashboardPDD from "./pages/DashboardPDD";
+import DashboardPDD from "./pages/dashboard_view/DashboardPDD";
 
 // Komponen lainnya
-import ProtectedRoute from "./components/ProtectedRoute";
-import BeritaDetail from "./pages/BeritaDetail";
-import JurusanSekolah from "./pages/JurusanSekolah";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
+import BeritaDetail from "./pages/guest_view/BeritaDetail";
+import JurusanSekolah from "./pages/guest_view/JurusanSekolah";
 
 function App() {
   const location = useLocation();

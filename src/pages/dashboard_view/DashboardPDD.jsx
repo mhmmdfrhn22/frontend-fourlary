@@ -1,4 +1,6 @@
-import { AppSidebar } from "@/components/app-sidebar"
+"use client"
+
+import { AppSidebarPDD } from "@/components/dashboard_component/app-sidebar-pdd"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,13 +14,12 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 
-
-export default function Dashboard() {
+export default function DashboardPDD() {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebarPDD />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
@@ -30,14 +31,15 @@ export default function Dashboard() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Dashboard</BreadcrumbPage>
+                  <BreadcrumbPage>Dashboard PDD Sekolah</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
+
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          {/* Nested route akan dirender di sini */}
+          {/* Nested route PDD akan muncul di sini */}
           <Outlet />
         </div>
       </SidebarInset>

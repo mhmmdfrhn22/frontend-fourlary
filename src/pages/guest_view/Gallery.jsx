@@ -12,7 +12,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import GalleryDetailModal from "@/components/detailGaleryModal";
+import GalleryDetailModal from "@/components/gallery_component/detailGaleryModal";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {

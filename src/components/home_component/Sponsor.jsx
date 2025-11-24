@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 
 // Mengimpor gambar
-import logo1 from "../assets/1.png";
-import logo2 from "../assets/2.png";
-import logo3 from "../assets/3.png";
-import logo4 from "../assets/4.png";
-import logo5 from "../assets/5.png";
-import logo6 from "../assets/6.png";
-import logo7 from "../assets/7.png";
-import logo8 from "../assets/8.png";
-import logo9 from "../assets/9.png";
-import logo10 from "../assets/10.png";
+import logo1 from "../../assets/1.png";
+import logo2 from "../../assets/2.png";
+import logo3 from "../../assets/3.png";
+import logo4 from "../../assets/4.png";
+import logo5 from "../../assets/5.png";
+import logo6 from "../../assets/6.png";
+import logo7 from "../../assets/7.png";
+import logo8 from "../../assets/8.png";
+import logo9 from "../../assets/9.png";
+import logo10 from "../../assets/10.png";
 
 export default function Sponsor() {
   return (

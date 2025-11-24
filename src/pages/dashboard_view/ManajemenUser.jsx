@@ -148,6 +148,12 @@ export default function ManajemenUser() {
       role_id: getRoleId(formData.get("role")),
     }
 
+    // Check if the role is not Admin for the current user
+    if (newUser.role_id === 2) {
+      Swal.fire("Error", "Anda tidak dapat menambahkan Admin lainnya.", "error")
+      return
+    }
+
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(API_URL + "/register", {
@@ -182,8 +188,14 @@ export default function ManajemenUser() {
     const updatedUser = {
       ...editingUser,
       username: formData.get("username"),
-      email: formData.get("email"),  // Mengambil email dari form
+      email: editingUser.email,  // Menjaga agar email tidak bisa diubah
       role_id: getRoleId(formData.get("role")),
+    }
+
+    // Prevent Admin from changing to Admin role
+    if (updatedUser.role_id === 2 && editingUser.role !== "Admin") {
+      Swal.fire("Error", "Anda tidak dapat mengubah role menjadi Admin.", "error")
+      return
     }
 
     try {
@@ -273,16 +285,23 @@ export default function ManajemenUser() {
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="role">Role</Label>
-                    <select
+                    <Select
                       id="role"
                       name="role"
                       className="border rounded-md h-9 px-3"
                       required
                     >
-                      <option value="Guest">Guest</option>
-                      <option value="Admin">Admin</option>
-                      <option value="Tim Publikasi">Tim Publikasi</option>
-                    </select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Pilih Role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Role</SelectLabel>
+                          <SelectItem value="Guest">Guest</SelectItem>
+                          <SelectItem value="Tim Publikasi">Tim Publikasi</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
                 <DialogFooter className="mt-4">
@@ -368,79 +387,81 @@ export default function ManajemenUser() {
                 Email: {user.email} {/* Menampilkan email */}
               </p>
               <div className="flex gap-2 mt-3">
-                <Dialog
-                  open={editingUser?.id === user.id}
-                  onOpenChange={(open) => setEditingUser(open ? user : null)}
-                >
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="link"
-                      size="sm"
-                      className="text-blue-600 p-0"
-                      onClick={() => setEditingUser(user)}
-                    >
-                      Edit
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Edit Pengguna</DialogTitle>
-                      <DialogDescription>
-                        Ubah username, email, dan role.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <form onSubmit={handleEditSubmit}>
-                      <div className="grid gap-4">
-                        <div className="grid gap-2">
-                          <Label htmlFor="username">Username</Label>
-                          <Input
-                            id="username"
-                            name="username"
-                            defaultValue={editingUser?.username}
-                            required
-                          />
+                {user.role !== "Admin" && (
+                  <Dialog
+                    open={editingUser?.id === user.id}
+                    onOpenChange={(open) => setEditingUser(open ? user : null)}
+                  >
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="link"
+                        size="sm"
+                        className="text-blue-600 p-0"
+                        onClick={() => setEditingUser(user)}
+                      >
+                        Edit
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Edit Pengguna</DialogTitle>
+                        <DialogDescription>
+                          Ubah username dan role.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <form onSubmit={handleEditSubmit}>
+                        <div className="grid gap-4">
+                          <div className="grid gap-2">
+                            <Label htmlFor="username">Username</Label>
+                            <Input
+                              id="username"
+                              name="username"
+                              defaultValue={editingUser?.username}
+                              required
+                            />
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="role">Role</Label>
+                            <Select
+                              id="role"
+                              name="role"
+                              className="border rounded-md h-9 px-3"
+                              defaultValue={editingUser?.role}
+                              required
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Pilih Role" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectGroup>
+                                  <SelectLabel>Role</SelectLabel>
+                                  <SelectItem value="Guest">Guest</SelectItem>
+                                  <SelectItem value="Tim Publikasi">Tim Publikasi</SelectItem>
+                                </SelectGroup>
+                              </SelectContent>
+                            </Select>
+                          </div>
                         </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="email">Email</Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            defaultValue={editingUser?.email}
-                            required
-                          />
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="role">Role</Label>
-                          <select
-                            id="role"
-                            name="role"
-                            className="border rounded-md h-9 px-3"
-                            defaultValue={editingUser?.role}
-                            required
-                          >
-                            <option value="Guest">Guest</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Tim Publikasi">Tim Publikasi</option>
-                          </select>
-                        </div>
-                      </div>
-                      <DialogFooter className="mt-4">
-                        <DialogClose asChild>
-                          <Button variant="outline">Cancel</Button>
-                        </DialogClose>
-                        <Button type="submit">Simpan</Button>
-                      </DialogFooter>
-                    </form>
-                  </DialogContent>
-                </Dialog>
-                <Button
-                  variant="link"
-                  size="sm"
-                  className="text-red-600 p-0"
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Hapus
-                </Button>
+                        <DialogFooter className="mt-4">
+                          <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
+                          </DialogClose>
+                          <Button type="submit">Simpan</Button>
+                        </DialogFooter>
+                      </form>
+                    </DialogContent>
+                  </Dialog>
+                )}
+                {user.role !== "Admin" && (
+                  <Button
+                    variant="link"
+                    size="sm"
+                    className="text-red-600"
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Hapus
+                  </Button>
+                )}
               </div>
             </div>
           ))}
@@ -467,79 +488,81 @@ export default function ManajemenUser() {
                   <TableCell>{user.joinedAt?.split("T")[0]}</TableCell>
                   <TableCell>{getRoleBadge(user.role)}</TableCell>
                   <TableCell className="text-left space-x-2">
-                    <Dialog
-                      open={editingUser?.id === user.id}
-                      onOpenChange={(open) => setEditingUser(open ? user : null)}
-                    >
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="link"
-                          size="sm"
-                          className="text-blue-600"
-                          onClick={() => setEditingUser(user)}
-                        >
-                          Edit
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Edit Pengguna</DialogTitle>
-                          <DialogDescription>
-                            Ubah username, email, dan role.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <form onSubmit={handleEditSubmit}>
-                          <div className="grid gap-4">
-                            <div className="grid gap-2">
-                              <Label htmlFor="username">Username</Label>
-                              <Input
-                                id="username"
-                                name="username"
-                                defaultValue={editingUser?.username}
-                                required
-                              />
+                    {user.role !== "Admin" && (
+                      <Dialog
+                        open={editingUser?.id === user.id}
+                        onOpenChange={(open) => setEditingUser(open ? user : null)}
+                      >
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="link"
+                            size="sm"
+                            className="text-blue-600"
+                            onClick={() => setEditingUser(user)}
+                          >
+                            Edit
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Edit Pengguna</DialogTitle>
+                            <DialogDescription>
+                              Ubah username dan role.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <form onSubmit={handleEditSubmit}>
+                            <div className="grid gap-4">
+                              <div className="grid gap-2">
+                                <Label htmlFor="username">Username</Label>
+                                <Input
+                                  id="username"
+                                  name="username"
+                                  defaultValue={editingUser?.username}
+                                  required
+                                />
+                              </div>
+                              <div className="grid gap-2">
+                                <Label htmlFor="role">Role</Label>
+                                <Select
+                                  id="role"
+                                  name="role"
+                                  className="border rounded-md h-9 px-3"
+                                  defaultValue={editingUser?.role}
+                                  required
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Pilih Role" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectGroup>
+                                      <SelectLabel>Role</SelectLabel>
+                                      <SelectItem value="Guest">Guest</SelectItem>
+                                      <SelectItem value="Tim Publikasi">Tim Publikasi</SelectItem>
+                                    </SelectGroup>
+                                  </SelectContent>
+                                </Select>
+                              </div>
                             </div>
-                            <div className="grid gap-2">
-                              <Label htmlFor="email">Email</Label>
-                              <Input
-                                id="email"
-                                name="email"
-                                defaultValue={editingUser?.email}
-                                required
-                              />
-                            </div>
-                            <div className="grid gap-2">
-                              <Label htmlFor="role">Role</Label>
-                              <select
-                                id="role"
-                                name="role"
-                                className="border rounded-md h-9 px-3"
-                                defaultValue={editingUser?.role}
-                                required
-                              >
-                                <option value="Guest">Guest</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Tim Publikasi">Tim Publikasi</option>
-                              </select>
-                            </div>
-                          </div>
-                          <DialogFooter className="mt-4">
-                            <DialogClose asChild>
-                              <Button variant="outline">Cancel</Button>
-                            </DialogClose>
-                            <Button type="submit">Simpan</Button>
-                          </DialogFooter>
-                        </form>
-                      </DialogContent>
-                    </Dialog>
-                    <Button
-                      variant="link"
-                      size="sm"
-                      className="text-red-600"
-                      onClick={() => handleDelete(user.id)}
-                    >
-                      Hapus
-                    </Button>
+                            <DialogFooter className="mt-4">
+                              <DialogClose asChild>
+                                <Button variant="outline">Cancel</Button>
+                              </DialogClose>
+                              <Button type="submit">Simpan</Button>
+                            </DialogFooter>
+                          </form>
+                        </DialogContent>
+                      </Dialog>
+                    )}
+                    {user.role !== "Admin" && (
+                      <Button
+                        variant="link"
+                        size="sm"
+                        className="text-red-600"
+                        onClick={() => handleDelete(user.id)}
+                      >
+                        Hapus
+                      </Button>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

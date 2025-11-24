@@ -2,9 +2,9 @@
 
 import { Home, Users, Image, Newspaper, UserCog, ListFilter, Presentation, MessageCircle, Book, BriefcaseBusiness } from "lucide-react"
 
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavProjects } from "@/components/dashboard_component/nav-projects"
+import { NavUser } from "@/components/dashboard_component/nav-user"
+import { TeamSwitcher } from "@/components/dashboard_component/team-switcher"
 import {
   Sidebar,
   SidebarContent,

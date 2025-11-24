@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import fotovisiImage from "../assets/fotovisi.JPG";
+import fotovisiImage from "../../assets/fotovisi.JPG";
 
 
 export default function Visimisi() {

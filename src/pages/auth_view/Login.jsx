@@ -1,11 +1,11 @@
-import { GalleryVerticalEnd } from "lucide-react";
-import { RegisterComponent } from "../components/register-component";
+import { useEffect } from "react";
+import LoginComponent from "../../components/auth_component/login-component.jsx";
 
 // Import gambar
-import logoImage from '../assets/logofourlary.svg';
-import loginImage from '../assets/loginimage.JPG';
+import logoImage from '../../assets/logofourlary.svg';
+import loginImage from '../../assets/loginimage.JPG';
 
-export default function Register() {
+export default function LoginPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       {/* Left side */}
@@ -23,7 +23,12 @@ export default function Register() {
         {/* Form */}
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <RegisterComponent />
+            <LoginComponent />
+            <div className="mt-4 text-center">
+              <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+                Lupa Password?
+              </a>
+            </div>
           </div>
         </div>
       </div>
