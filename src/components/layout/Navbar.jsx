@@ -98,7 +98,7 @@ export default function Navbar() {
                 {products.map((item) => (
                   <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50">
                     <div className="flex size-11 items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                      <item.icon aria-hidden="true" className="size-6 text-gray-600 group-hover:text-indigo-600" />
+                      <item.icon aria-hidden="true" className="size-6 text-gray-600 group-hover:text-blue-600" />
                     </div>
                     <div className="flex-auto">
                       <Link to={item.href} className="block font-semibold text-gray-900">

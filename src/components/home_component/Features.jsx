@@ -71,7 +71,7 @@ export default function Features() {
           viewport={{ once: true }}
           className="mx-auto max-w-2xl lg:text-center"
         >
-          <h2 className="text-base font-semibold text-indigo-600">
+          <h2 className="text-base font-semibold text-blue-600">
             Fitur Fitur Aplikasi
           </h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
@@ -97,7 +97,7 @@ export default function Features() {
               className="relative pl-16 group hover:scale-[1.02] transition-transform duration-300"
             >
               <dt className="text-base font-semibold text-gray-900">
-                <div className="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 group-hover:bg-indigo-700 transition-colors duration-300">
+                <div className="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 group-hover:bg-blue-700 transition-colors duration-300">
                   <feature.icon
                     aria-hidden="true"
                     className="h-6 w-6 text-white"

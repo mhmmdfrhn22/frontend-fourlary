@@ -53,7 +53,7 @@ export default function Visimisi() {
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
             <div className="lg:max-w-lg">
-              <p className="text-lg font-semibold text-indigo-600">
+              <p className="text-lg font-semibold text-blue-600">
                 Visi Misi Sekolah SMKN 4 Bogor
               </p>
               <h1 className="mt-4 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
@@ -168,7 +168,7 @@ export default function Visimisi() {
                 transition={{ duration: 0.7, delay: 0.2 * index }}
               >
                 <dt className="text-base/7 font-semibold text-gray-900">
-                  <div className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-indigo-600">
+                  <div className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-blue-600">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"

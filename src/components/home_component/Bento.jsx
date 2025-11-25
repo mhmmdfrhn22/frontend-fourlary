@@ -37,7 +37,7 @@ export default function Bento() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center text-lg font-semibold text-indigo-600"
+          className="text-center text-lg font-semibold text-blue-600"
         >
           Fitur Fitur Terbaik Fourlary
         </motion.h2>
