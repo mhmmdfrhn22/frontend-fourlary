@@ -75,7 +75,7 @@ export default function Features() {
             Fitur Fitur Aplikasi
           </h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
-            Ada Apa Saja Ada di <span className="text-blue-800">Fourlary🤔</span>
+            Ada Apa Saja di <span className="text-blue-800">Fourlary🤔</span>
           </p>
           <p className="mt-6 text-lg text-gray-700">
             Didesain agar mudah digunakan, informatif, dan responsif di berbagai perangkat.
